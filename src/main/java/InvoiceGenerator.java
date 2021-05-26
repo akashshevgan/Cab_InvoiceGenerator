@@ -13,10 +13,18 @@ public class InvoiceGenerator {
 
     public double calculateFareForMultipleRides(Ride[] rides) {
         double aggregateTotalFare = 0;
-        for (Ride ride: rides) {
+        for (Ride ride : rides) {
             aggregateTotalFare += this.calculateFare(ride.distance, ride.time);
         }
         return aggregateTotalFare;
+    }
+
+    public InvoiceSummary calculateFare(Ride[] rides) {
+        double totalFare = 0;
+        for (Ride ride : rides) {
+            totalFare += this.calculateFare(ride.distance, ride.time);
+        }
+        return new InvoiceSummary(rides.length, totalFare);
     }
 }
 
